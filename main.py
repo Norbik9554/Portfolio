@@ -199,7 +199,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         <span class="arrow">➜</span>
       </a>
 
-      <a href="https://steamcommunity.com/id/TWÓJ_STEAM_ID" target="_blank" rel="noopener noreferrer" class="link-card">
+      <a href="https://steamcommunity.com/id/Norbik_/" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">🎮</span>
           <span>Profil Steam</span>
