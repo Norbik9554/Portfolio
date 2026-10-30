@@ -51,7 +51,9 @@ HTML_CONTENT = """<!DOCTYPE html>
       object-fit: cover;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
-    .profile-info { text-align: center; }
+    .profile-info { 
+      text-align: center; 
+    }
     .profile-info h1 {
       font-size: 1.6rem;
       color: var(--text-bright);
@@ -108,4 +110,143 @@ HTML_CONTENT = """<!DOCTYPE html>
       color: var(--text-bright);
       font-weight: 600;
       font-size: 0.98rem;
-      transition: transform 0.15s ease, border-color 0.15s ease, background-
+      transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .link-card:hover {
+      transform: translateY(-2px);
+      border-color: #58a6ff;
+      background-color: #1f242c;
+    }
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .link-left span.icon { 
+      font-size: 1.3rem; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .arrow { 
+      color: #8b949e; 
+      font-size: 0.9rem; 
+    }
+    .link-card.bmc {
+      background-color: var(--accent-bmc);
+      color: #000000;
+      border-color: var(--accent-bmc);
+    }
+    .link-card.bmc:hover {
+      background-color: #ffea55;
+      border-color: #ffea55;
+    }
+    .link-card.bmc .arrow { 
+      color: #333333; 
+    }
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6e7681;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="avatar" src="https://github.com/Norbik9554.png" alt="Norbik9554">
+
+    <div class="profile-info">
+      <h1>Norbik9554</h1>
+      <p>Python Enthusiast & Developer</p>
+    </div>
+
+    <div class="status-badge">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Sprawdzanie AddonsLoader...</span>
+    </div>
+
+    <div class="links-list">
+      <a href="https://buymeacoffee.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card bmc">
+        <div class="link-left">
+          <span class="icon">☕</span>
+          <span>Postaw mi kawę (Buy Me a Coffee)</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+
+      <a href="https://addons-loader.vercel.app" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <span class="icon">⚡</span>
+          <span>Addons Loader (Serwer / API)</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+
+      <a href="https://github.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <span class="icon">🐙</span>
+          <span>Mój profil GitHub</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+
+      <a href="https://discord.gg/TWÓJ_KOD_ZAPROSZENIA" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <span class="icon">💬</span>
+          <span>Dołącz do Discorda</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+
+      <a href="https://steamcommunity.com/id/TWÓJ_STEAM_ID" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <span class="icon">🎮</span>
+          <span>Profil Steam</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+    </div>
+
+    <footer>
+      &copy; <span id="year"></span> Norbik9554 • Wszelkie prawa zastrzeżone
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function checkServerStatus() {
+      const dot = document.getElementById("statusDot");
+      const text = document.getElementById("statusText");
+
+      try {
+        await fetch("https://addons-loader.vercel.app", { 
+          method: "HEAD",
+          mode: "no-cors"
+        });
+        dot.className = "status-dot online";
+        text.textContent = "AddonsLoader: Online";
+      } catch (err) {
+        dot.className = "status-dot offline";
+        text.textContent = "AddonsLoader: Offline";
+      }
+    }
+
+    checkServerStatus();
+  </script>
+</body>
+</html>
+"""
+
+@app.get("/", response_class=HTMLResponse)
+def serve_portfolio():
+    return HTML_CONTENT
+
+@app.get("/api/info")
+def get_info():
+    return {
+        "status": "online",
+        "creator": "Norbik9554",
+        "primary_project": "AddonsLoader"
+    }
