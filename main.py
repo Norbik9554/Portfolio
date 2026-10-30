@@ -239,7 +239,10 @@ HTML_CONTENT = """<!DOCTYPE html>
 </html>
 """
 
+# Obsługuje zarówno wejście na domenę główną, jak i wewnętrzne wywołanie pliku przez Vercel
 @app.get("/", response_class=HTMLResponse)
+@app.get("/api", response_class=HTMLResponse)
+@app.get("/api/index.py", response_class=HTMLResponse)
 def serve_portfolio():
     return HTML_CONTENT
 
@@ -250,3 +253,4 @@ def get_info():
         "creator": "Norbik9554",
         "primary_project": "AddonsLoader"
     }
+  
