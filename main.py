@@ -30,7 +30,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
+      play: flex;
       justify-content: center;
       align-items: center;
       padding: 30px 15px;
@@ -191,7 +191,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         <span class="arrow">➜</span>
       </a>
 
-      <a href="https://discord.gg/TWÓJ_KOD_ZAPROSZENIA" target="_blank" rel="noopener noreferrer" class="link-card">
+      <a href="https://discord.gg/7DHwePqWd" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">💬</span>
           <span>Dołącz do Discorda</span>
