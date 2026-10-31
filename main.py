@@ -476,5 +476,5 @@ def get_info():
     return {
         "status": "online",
         "creator": "Norbik9554",
-        "primary_project": "AddonsLoader"
+        "primary_project": "Addons Loader"
     }
