@@ -106,6 +106,42 @@
       padding: 30px 15px;
     }
 
+    /* Przełącznik języka */
+    .lang-switch {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: inline-flex;
+      padding: 3px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(31, 39, 51, 0.08);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 13px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-bright);
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
     .layout {
       width: 100%;
       max-width: 960px;
@@ -338,6 +374,12 @@
     <span class="blob b4"></span>
   </div>
 
+  <!-- Przełącznik języka -->
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" class="lang-btn" data-lang="pl">PL</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+  </div>
+
   <div class="layout">
   <div class="container">
     <!-- Awatar (pobierany bezpośrednio z Twojego profilu GitHub) -->
@@ -352,7 +394,7 @@
     <!-- Status API -->
     <div class="status-badge">
       <span class="status-dot" id="statusDot"></span>
-      <span id="statusText">Sprawdzanie AddonsLoader...</span>
+      <span id="statusText"></span>
     </div>
 
     <!-- Lista kafelków -->
@@ -361,7 +403,7 @@
       <a href="https://github.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">🐙</span>
-          <span>Mój profil GitHub</span>
+          <span data-i18n="link_github"></span>
         </div>
         <span class="arrow">➜</span>
       </a>
@@ -376,19 +418,19 @@
       </a>
 
       <!-- Discord -->
-      <a href="https://discord.gg/TWÓJ_KOD_ZAPROSZENIA" target="_blank" rel="noopener noreferrer" class="link-card">
+      <a href="https://discord.gg/7DHwePqWd" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">💬</span>
-          <span>Dołącz do Discorda</span>
+          <span data-i18n="link_discord"></span>
         </div>
         <span class="arrow">➜</span>
       </a>
 
       <!-- Steam -->
-      <a href="https://steamcommunity.com/id/TWÓJ_STEAM_ID" target="_blank" rel="noopener noreferrer" class="link-card">
+      <a href="https://steamcommunity.com/id/Norbik_/" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">🎮</span>
-          <span>Profil Steam</span>
+          <span data-i18n="link_steam"></span>
         </div>
         <span class="arrow">➜</span>
       </a>
@@ -397,34 +439,33 @@
       <a href="https://buymeacoffee.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card bmc">
         <div class="link-left">
           <span class="icon">☕</span>
-          <span>Postaw mi kawę (Buy Me a Coffee)</span>
+          <span data-i18n="link_bmc"></span>
         </div>
         <span class="arrow">➜</span>
       </a>
     </div>
 
     <footer>
-      &copy; <span id="year"></span> Norbik9554 • Wszelkie prawa zastrzeżone
+      &copy; <span id="year"></span> Norbik9554 • <span data-i18n="footer"></span>
     </footer>
   </div>
 
   <!-- O mnie -->
   <aside class="about">
-    <h2>O mnie</h2>
-    <p>Cześć! Jestem Norbert – programista Pythona. Lubię tworzyć własne narzędzia i aplikacje, a po godzinach grać i dłubać w modyfikacjach.</p>
+    <h2 data-i18n="about_title"></h2>
+    <p data-i18n="about_text"></p>
 
-    <h3>Hobby</h3>
+    <h3 data-i18n="hobby_title"></h3>
     <div class="tags">
-      <span class="tag">🐍 Programowanie ©️➕➕</span>
-      <span class="tag">🎮 Gry</span>
-      <span class="tag">🛠️ Własne narzędzia</span>
-      <span class="tag">🧩 Modyfikacje 👾</span>
-      <span class="tag">📿 LLM 🦾</span>
-      <span class="tag">📂 Dokumentacje 📄</span>
-
+      <span class="tag" data-i18n="hobby_1"></span>
+      <span class="tag" data-i18n="hobby_2"></span>
+      <span class="tag" data-i18n="hobby_3"></span>
+      <span class="tag" data-i18n="hobby_4"></span>
+      <span class="tag" data-i18n="hobby_5"></span>
+      <span class="tag" data-i18n="hobby_6"></span>
     </div>
 
-    <h3>Technologie</h3>
+    <h3 data-i18n="tech_title"></h3>
     <div class="tags">
       <span class="tag">Python</span>
       <span class="tag">PySide6</span>
@@ -436,24 +477,114 @@
     // Aktualny rok w stopce
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Tłumaczenia
+    const I18N = {
+      pl: {
+        page_title: "Norbik9554 | Main",
+        link_github: "Mój profil GitHub",
+        link_discord: "Dołącz do Discorda",
+        link_steam: "Profil Steam",
+        link_bmc: "Postaw mi kawę (Buy Me a Coffee)",
+        footer: "Wszelkie prawa zastrzeżone",
+        about_title: "O mnie",
+        about_text: "Cześć! Jestem Norbert – programista Pythona. Lubię tworzyć własne narzędzia i aplikacje, a po godzinach grać i dłubać w modyfikacjach.",
+        hobby_title: "Hobby",
+        hobby_1: "🐍 Programowanie ©️➕➕",
+        hobby_2: "🎮 Gry",
+        hobby_3: "🛠️ Własne narzędzia",
+        hobby_4: "🧩 Modyfikacje 👾",
+        hobby_5: "📿 LLM 🦾",
+        hobby_6: "📂 Dokumentacje 📄",
+        tech_title: "Technologie",
+        status_checking: "Sprawdzanie AddonsLoader...",
+        status_online: "AddonsLoader: Online",
+        status_offline: "AddonsLoader: Offline"
+      },
+      en: {
+        page_title: "Norbik9554 | Main",
+        link_github: "My GitHub profile",
+        link_discord: "Join Discord",
+        link_steam: "Steam profile",
+        link_bmc: "Buy me a coffee",
+        footer: "All rights reserved",
+        about_title: "About me",
+        about_text: "Hi! I'm Norbert – a Python developer. I enjoy building my own tools and apps, and in my free time I play games and tinker with mods.",
+        hobby_title: "Hobbies",
+        hobby_1: "🐍 Programming ©️➕➕",
+        hobby_2: "🎮 Gaming",
+        hobby_3: "🛠️ Custom tools",
+        hobby_4: "🧩 Modding 👾",
+        hobby_5: "📿 LLMs 🦾",
+        hobby_6: "📂 Documentation 📄",
+        tech_title: "Technologies",
+        status_checking: "Checking AddonsLoader...",
+        status_online: "AddonsLoader: Online",
+        status_offline: "AddonsLoader: Offline"
+      }
+    };
+
+    let currentLang = "pl";
+    let statusState = "checking";
+
+    function renderStatus() {
+      document.getElementById("statusText").textContent = I18N[currentLang]["status_" + statusState];
+    }
+
+    function setLang(lang) {
+      if (!I18N[lang]) lang = "pl";
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = I18N[lang].page_title;
+
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        el.textContent = I18N[lang][el.getAttribute("data-i18n")];
+      });
+
+      document.querySelectorAll(".lang-btn").forEach(function (btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      });
+
+      renderStatus();
+
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setLang(btn.getAttribute("data-lang"));
+      });
+    });
+
+    // Język startowy: zapisany wybór, a jeśli go brak - język przeglądarki
+    let startLang = "pl";
+    try {
+      const saved = localStorage.getItem("lang");
+      if (saved) {
+        startLang = saved;
+      } else if ((navigator.language || "").toLowerCase().indexOf("pl") !== 0) {
+        startLang = "en";
+      }
+    } catch (e) {}
+    setLang(startLang);
+
     // Sprawdzanie dostępności drugiego serwera Vercel
     async function checkServerStatus() {
       const dot = document.getElementById("statusDot");
-      const text = document.getElementById("statusText");
 
       try {
         // Zapytanie bez blokowania CORS (tryb no-cors)
-        const response = await fetch("https://addons-loader.vercel.app", {
+        await fetch("https://addons-loader.vercel.app", {
           method: "HEAD",
           mode: "no-cors"
         });
 
         dot.className = "status-dot online";
-        text.textContent = "AddonsLoader: Online";
+        statusState = "online";
       } catch (err) {
         dot.className = "status-dot offline";
-        text.textContent = "AddonsLoader: Offline";
+        statusState = "offline";
       }
+      renderStatus();
     }
 
     checkServerStatus();
