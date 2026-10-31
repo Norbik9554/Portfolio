@@ -4,33 +4,166 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Norbik9554 | Hub & Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --card-border: #30363d;
-      --text: #c9d1d9;
-      --text-bright: #f0f6fc;
+      --bg: #eef1f5;
+      --bg-glow: #dbe7fb;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-bg-hover: #ffffff;
+      --card-border: #d5dbe3;
+      --text: #4a5565;
+      --text-bright: #1f2733;
+      --text-muted: #7b8696;
+      --accent: #3b82f6;
+      --accent-soft: #dbeafe;
       --accent-bmc: #FFDD00;
-      --status-ok: #238636;
-      --status-err: #da3633;
+      --status-ok: #22a06b;
+      --status-err: #e5484d;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Animowane tło */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e4ebf7 0%, #e9e6f5 50%, #dcecf7 100%);
+      background-size: 200% 200%;
+      animation: bgShift 18s ease-in-out infinite;
+    }
+
+    /* delikatna siatka */
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+      animation: gridMove 12s linear infinite;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+    }
+
+    .blob.b1 { width: 460px; height: 460px; background: #60a5fa; top: -120px; left: -100px; animation: float1 16s ease-in-out infinite; }
+    .blob.b2 { width: 420px; height: 420px; background: #a78bfa; bottom: -120px; right: -80px; animation: float2 20s ease-in-out infinite; }
+    .blob.b3 { width: 340px; height: 340px; background: #67e8f9; top: 40%; left: 55%; animation: float3 24s ease-in-out infinite; }
+    .blob.b4 { width: 300px; height: 300px; background: #93c5fd; bottom: 10%; left: 5%; animation: float2 22s ease-in-out infinite reverse; }
+
+    @keyframes bgShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes gridMove {
+      to { background-position: 48px 48px; }
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(120px, 90px) scale(1.15); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-130px, -80px) scale(1.2); }
+    }
+
+    @keyframes float3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-160px, 60px) scale(1.1); }
+      66% { transform: translate(80px, -110px) scale(0.9); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg, .bg::after, .blob { animation: none; }
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 30px 15px;
+    }
+
+    .layout {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .about {
+      flex: 1;
+      max-width: 400px;
+      margin-top: 30px;
+      padding: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(31, 39, 51, 0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    .about h2 {
+      font-size: 1.2rem;
+      color: var(--text-bright);
+      margin-bottom: 10px;
+    }
+
+    .about h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 20px 0 10px;
+    }
+
+    .about p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 860px) {
+      .layout { flex-direction: column; align-items: center; }
+      .about { max-width: 520px; width: 100%; margin-top: 0; }
     }
 
     .container {
@@ -47,9 +180,9 @@
       width: 105px;
       height: 105px;
       border-radius: 50%;
-      border: 3px solid var(--card-border);
+      border: 3px solid #ffffff;
       object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 0 2px var(--accent), 0 8px 24px rgba(59, 130, 246, 0.25);
     }
 
     .profile-info {
@@ -58,13 +191,14 @@
 
     .profile-info h1 {
       font-size: 1.6rem;
+      font-weight: 700;
       color: var(--text-bright);
       margin-bottom: 4px;
     }
 
     .profile-info p {
       font-size: 0.95rem;
-      color: #8b949e;
+      color: var(--text-muted);
       line-height: 1.4;
     }
 
@@ -79,25 +213,27 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 500;
+      color: var(--text-bright);
+      box-shadow: 0 2px 8px rgba(31, 39, 51, 0.06);
     }
 
     .status-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #8b949e;
-      box-shadow: 0 0 8px rgba(139, 148, 158, 0.6);
+      background: var(--text-muted);
+      box-shadow: 0 0 8px rgba(123, 134, 150, 0.5);
       transition: background 0.3s, box-shadow 0.3s;
     }
 
     .status-dot.online {
       background: var(--status-ok);
-      box-shadow: 0 0 8px rgba(35, 134, 54, 0.8);
+      box-shadow: 0 0 8px rgba(34, 160, 107, 0.6);
     }
 
     .status-dot.offline {
       background: var(--status-err);
-      box-shadow: 0 0 8px rgba(218, 54, 51, 0.8);
+      box-shadow: 0 0 8px rgba(229, 72, 77, 0.6);
     }
 
     /* Kafelki / Linki */
@@ -116,18 +252,21 @@
       padding: 14px 18px;
       background-color: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border-radius: 14px;
       text-decoration: none;
       color: var(--text-bright);
       font-weight: 600;
       font-size: 0.98rem;
-      transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 2px 8px rgba(31, 39, 51, 0.05);
+      backdrop-filter: blur(6px);
+      transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .link-card:hover {
       transform: translateY(-2px);
-      border-color: #58a6ff;
-      background-color: #1f242c;
+      border-color: var(--accent);
+      background-color: var(--card-bg-hover);
+      box-shadow: 0 8px 22px rgba(59, 130, 246, 0.18);
     }
 
     .link-left {
@@ -137,30 +276,47 @@
     }
 
     .link-left span.icon {
-      font-size: 1.3rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      font-size: 1.15rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .arrow {
-      color: #8b949e;
+      color: var(--text-muted);
       font-size: 0.9rem;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .link-card:hover .arrow {
+      color: var(--accent);
+      transform: translateX(3px);
     }
 
     /* Kafel wyróżniony: Buy Me a Coffee */
     .link-card.bmc {
       background-color: var(--accent-bmc);
-      color: #000000;
+      color: #1f2733;
       border-color: var(--accent-bmc);
+      box-shadow: 0 6px 18px rgba(255, 221, 0, 0.35);
+    }
+
+    .link-card.bmc .icon {
+      background: rgba(255, 255, 255, 0.55);
     }
 
     .link-card.bmc:hover {
-      background-color: #ffea55;
-      border-color: #ffea55;
+      background-color: #ffe84d;
+      border-color: #ffe84d;
+      box-shadow: 0 8px 24px rgba(255, 221, 0, 0.5);
     }
 
-    .link-card.bmc .arrow {
+    .link-card.bmc .arrow,
+    .link-card.bmc:hover .arrow {
       color: #333333;
     }
 
@@ -169,12 +325,20 @@
       margin-top: 20px;
       text-align: center;
       font-size: 0.8rem;
-      color: #6e7681;
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
+  <div class="bg">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+  </div>
+
+  <div class="layout">
   <div class="container">
     <!-- Awatar (pobierany bezpośrednio z Twojego profilu GitHub) -->
     <img class="avatar" src="https://github.com/Norbik9554.png" alt="Norbik9554">
@@ -193,11 +357,11 @@
 
     <!-- Lista kafelków -->
     <div class="links-list">
-      <!-- Buy Me a Coffee -->
-      <a href="https://buymeacoffee.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card bmc">
+      <!-- GitHub -->
+      <a href="https://github.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
-          <span class="icon">☕</span>
-          <span>Postaw mi kawę (Buy Me a Coffee)</span>
+          <span class="icon">🐙</span>
+          <span>Mój profil GitHub</span>
         </div>
         <span class="arrow">➜</span>
       </a>
@@ -206,16 +370,7 @@
       <a href="https://addons-loader.vercel.app" target="_blank" rel="noopener noreferrer" class="link-card">
         <div class="link-left">
           <span class="icon">⚡</span>
-          <span>Addons Loader (Serwer / API)</span>
-        </div>
-        <span class="arrow">➜</span>
-      </a>
-
-      <!-- GitHub -->
-      <a href="https://github.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <span class="icon">🐙</span>
-          <span>Mój profil GitHub</span>
+          <span>Addons Loader</span>
         </div>
         <span class="arrow">➜</span>
       </a>
@@ -237,11 +392,41 @@
         </div>
         <span class="arrow">➜</span>
       </a>
+
+      <!-- Buy Me a Coffee -->
+      <a href="https://buymeacoffee.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card bmc">
+        <div class="link-left">
+          <span class="icon">☕</span>
+          <span>Postaw mi kawę (Buy Me a Coffee)</span>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
     </div>
 
     <footer>
       &copy; <span id="year"></span> Norbik9554 • Wszelkie prawa zastrzeżone
     </footer>
+  </div>
+
+  <!-- O mnie -->
+  <aside class="about">
+    <h2>O mnie</h2>
+    <p>Cześć! Jestem Norbert – programista Pythona. Lubię tworzyć własne narzędzia i aplikacje, a po godzinach grać i dłubać w modyfikacjach.</p>
+
+    <h3>Hobby</h3>
+    <div class="tags">
+      <span class="tag">🐍 Programowanie</span>
+      <span class="tag">🎮 Gry</span>
+      <span class="tag">🛠️ Własne narzędzia</span>
+      <span class="tag">🧩 Modyfikacje</span>
+    </div>
+
+    <h3>Technologie</h3>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">PySide6</span>
+    </div>
+  </aside>
   </div>
 
   <script>
@@ -255,7 +440,7 @@
 
       try {
         // Zapytanie bez blokowania CORS (tryb no-cors)
-        const response = await fetch("https://addons-loader.vercel.app", { 
+        const response = await fetch("https://addons-loader.vercel.app", {
           method: "HEAD",
           mode: "no-cors"
         });
