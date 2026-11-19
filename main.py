@@ -442,7 +442,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       </a>
 
       <!-- Buy Me a Coffee -->
-      <a href="https://buymeacoffee.com/Norbik9554" target="_blank" rel="noopener noreferrer" class="link-card bmc">
+      <a href="https://buymeacoffee.com/norbik" target="_blank" rel="noopener noreferrer" class="link-card bmc">
         <div class="link-left">
           <span class="icon">☕</span>
           <span data-i18n="link_bmc"></span>
